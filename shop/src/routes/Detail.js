@@ -2,9 +2,7 @@ import { useParams } from "react-router-dom";
 
 const ItemDetail = (props) => {
   let {id} = useParams();
-  const target = props.item.filter(e => e.id === parseInt(id));
-  const target1 = props.item.find(e => e.id === parseInt(id));
-  console.log(target1)
+  const target = props.item.find(e => e.id === parseInt(id));
   const plag = target.length === 0
   return (
 
@@ -16,14 +14,14 @@ const ItemDetail = (props) => {
       <div className="row">
       <div className="col-md-6">
         <img
-          src={process.env.PUBLIC_URL + `/img/shoes${(parseInt(target[0].id)+1)}.jpg`}
+          src={process.env.PUBLIC_URL + `/img/shoes${(parseInt(target.id)+1)}.jpg`}
           width="100%"
         />
       </div>
       <div className="col-md-6">
-        <h4 className="pt-5"> {target[0].title}</h4>
-        <p>{target[0].content}</p>
-        <p>{target[0].price} $</p>
+        <h4 className="pt-5"> {target.title}</h4>
+        <p>{target.content}</p>
+        <p>{target.price} $</p>
         <button className="btn btn-danger">주문하기</button>
       </div>
     </div>
