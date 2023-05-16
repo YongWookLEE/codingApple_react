@@ -7,7 +7,7 @@ const Item = (props) => {
       className="col-md-4"
       key={props.idx}
       onClick={() => {
-        navigate("/detail");
+        navigate(`/detail/${props.item.id}`);
       }}
     >
       <img

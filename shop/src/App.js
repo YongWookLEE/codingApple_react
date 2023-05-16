@@ -18,19 +18,12 @@ function App() {
           <Navbar.Brand href="/">ShoeShop</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="#Cart">Cart</Nav.Link>
-            <Nav.Link
-              onClick={() => {
-                navigate("/detail");
-              }}
-            >
-              Detail
-            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
       <Routes>
         <Route path="/" element={<Main shoes={shoes} />} />
-        <Route path="/detail" element={<ItemDetail />} />
+        <Route path="/detail/:id" element={<ItemDetail item={shoes} />} />
         <Route path="/event" element={<Event />}>
           <Route path="one" element={<div>첫 주문시 양배추즙 서비스</div>} />
           <Route path="two" element={<div>생일기념 쿠폰 받기</div>} />
