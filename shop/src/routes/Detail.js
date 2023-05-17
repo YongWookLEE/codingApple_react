@@ -22,13 +22,6 @@ const ItemDetail = (props) => {
     };
   }, []); // ,하고 뒤에 [state]면 해당 state 업데이트시, 마운트시에만 함수실행
   // 빈 []면 마운트시에만 함수 실행
-  let [num, setNum] = useState("");
-
-  useEffect(() => {
-    if (isNaN(num) == true) {
-      alert("그러지마세요");
-    }
-  }, [num]);
 
   return (
     <div className="container">
@@ -54,11 +47,6 @@ const ItemDetail = (props) => {
               <h4 className="pt-5"> {target.title}</h4>
               <p>{target.content}</p>
               <p>{target.price} $</p>
-              <input
-                onChange={(e) => {
-                  setNum(e.target.value);
-                }}
-              ></input>
               <button className="btn btn-danger">주문하기</button>
             </div>
           </div>
