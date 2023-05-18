@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { flushSync } from "react-dom";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
+import { addItem } from "../store/cartSlice";
+import { useDispatch } from "react-redux";
 // import styled from 'styled-components';
 
 const ItemDetail = (props) => {
@@ -12,7 +13,12 @@ const ItemDetail = (props) => {
   let [saleState, setSaleState] = useState(true);
   let [tabState, setTabState] = useState(0);
   let [fade, setFade] = useState("");
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
 
+  const goToCart = () => {
+    navigate("/cart")
+  }
   // mount, update 시 코드 실행해준다
   // html 렌더링 후에 동작한다.
   useEffect(() => {
@@ -54,7 +60,11 @@ const ItemDetail = (props) => {
               <h4 className="pt-5"> {target.title}</h4>
               <p>{target.content}</p>
               <p>{target.price} $</p>
-              <button className="btn btn-danger">주문하기</button>
+              <button className="btn btn-danger"
+              onClick={() => {
+                dispatch(addItem(target));
+                goToCart();
+              }}>주문하기</button>
             </div>
           </div>
           <Nav fill variant="tabs" defaultActiveKey="link-0">

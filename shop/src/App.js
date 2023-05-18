@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import data from "./data/data";
+import data from "./store/data";
 import Main from "./routes/Main";
 import ItemDetail from "./routes/Detail";
 import Event from "./routes/Event";
@@ -16,9 +16,13 @@ function App() {
     <div className="App">
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="/">ShoeShop</Navbar.Brand>
+          <Navbar.Brand onClick={() =>{
+            navigate("/");
+          }}>ShoeShop</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="/cart">Cart</Nav.Link>
+            <Nav.Link onClick={()=>{
+              navigate("/cart")
+            }}>Cart</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

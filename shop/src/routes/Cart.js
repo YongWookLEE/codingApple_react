@@ -1,12 +1,16 @@
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { changeNm, changeAge } from "../data/store";
+import { changeCnt } from "../store/cartSlice";
+import { changeNm } from "../store/userSlice";
+
 
 const Cart = () => {
-  let data = useSelector((state) => state.cart);
+  let cart = useSelector((state) => state.cart)
   let user = useSelector((state) => state.user);
   let dispatch = useDispatch();
-  console.log(user.age);
+ 
+
+  console.log(user.age)
   return (
     <div>
       {user.name}의 장바구니
@@ -20,7 +24,7 @@ const Cart = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((d) => (
+          {cart.map((d) => (
             <tr>
               <td>{d.id}</td>
               <td>{d.name}</td>
@@ -28,7 +32,7 @@ const Cart = () => {
               <td>
                 <button
                   onClick={() => {
-                    dispatch(changeNm());
+                    dispatch(changeCnt(d.id));
                   }}
                 >
                   +
