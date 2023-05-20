@@ -8,12 +8,13 @@ const cart = createSlice({
     ],
 
     reducers: {
-        changeCnt(state, id){
-            let target =state.find(m => m.id === id.payload);
-            target.count++;
+        changeCnt(state, action){
+            let target =state.find(m => m.id === action.payload.id);
+            if(target.count <= 0 && action.payload.amt < 0) return;
+            target.count += action.payload.amt;
         },
-        addItem(state, item){
-            let target = item.payload;
+        addItem(state, action){
+            let target = action.payload;
 
             if (state.find(i => i.id === target.id) === undefined){
                 state.push({ id: target.id, name: target.title, count: 1 });
@@ -22,12 +23,16 @@ const cart = createSlice({
             }
 
             alert("이미 추가된 항목입니다.");
+        },
+        deleteItem(state, action){
+            const idx = state.findIndex(e => e.id === action.payload)
+            state.splice(idx,1);
         }
     }
   });
   // 항목 지우기 버튼
   // 수량 줄이기 버튼 / 1에서 -시켰을때 처리
 
-  export let {changeCnt, addItem} = cart.actions
+  export let {changeCnt, addItem, deleteItem} = cart.actions
 
   export default cart;

@@ -1,7 +1,8 @@
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { changeCnt } from "../store/cartSlice";
+import { changeCnt, deleteItem } from "../store/cartSlice";
 import { changeNm } from "../store/userSlice";
+import styled from "styled-components";
 
 
 const Cart = () => {
@@ -9,6 +10,13 @@ const Cart = () => {
   let user = useSelector((state) => state.user);
   let dispatch = useDispatch();
  
+  const ChangeBtn = styled.button`
+  background: white;
+  color: black;
+  font-size: 18px;
+  border: none;
+  size: 10px;
+  `
 
   console.log(user.age)
   return (
@@ -20,7 +28,8 @@ const Cart = () => {
             <th>상품번호</th>
             <th>상품명</th>
             <th>수량</th>
-            <th>변경하기</th>
+            <th>수량 변경</th>
+            <th>삭제</th>
           </tr>
         </thead>
         <tbody>
@@ -30,13 +39,25 @@ const Cart = () => {
               <td>{d.name}</td>
               <td>{d.count}</td>
               <td>
-                <button
+                <ChangeBtn
                   onClick={() => {
-                    dispatch(changeCnt(d.id));
+                    dispatch(changeCnt({id:d.id, amt:1}));
                   }}
                 >
                   +
-                </button>
+                </ChangeBtn>
+                <ChangeBtn onClick={() => {
+                  dispatch(changeCnt({id:d.id, amt:-1}))
+                }}>
+                  -
+                </ChangeBtn>
+              </td>
+              <td>
+              <ChangeBtn onClick={() =>{
+                dispatch(deleteItem(d.id))
+              }}>
+                삭제하기
+              </ChangeBtn>
               </td>
             </tr>
           ))}
