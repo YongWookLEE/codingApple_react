@@ -18,7 +18,6 @@ const Cart = () => {
   size: 10px;
   `
 
-  console.log(user.age)
   return (
     <div>
       {user.name}의 장바구니

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import { addItem } from "../store/cartSlice";
 import { useDispatch } from "react-redux";
@@ -8,13 +8,15 @@ import { useDispatch } from "react-redux";
 const ItemDetail = (props) => {
   let timeoutId;
   let { id } = useParams(); // 쿼리 스트링 파람으로 가져온다
-  const target = props.item.find((e) => e.id === parseInt(id));
-  const plag = target.length === 0;
   let [saleState, setSaleState] = useState(true);
   let [tabState, setTabState] = useState(0);
   let [fade, setFade] = useState("");
   let dispatch = useDispatch();
   let navigate = useNavigate();
+  let {state} = useLocation();
+  console.log(state)
+  const target = state === null? props.item.find((e) => e.id === parseInt(id)) : state;
+  const plag = target.length === 0;
 
   const goToCart = () => {
     navigate("/cart")

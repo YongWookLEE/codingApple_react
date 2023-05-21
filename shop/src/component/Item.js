@@ -7,6 +7,17 @@ const Item = (props) => {
       className="col-md-4"
       key={props.idx}
       onClick={() => {
+        let list = JSON.parse(localStorage.getItem('watched'));
+        if(!list.find(i => i.id === props.item.id)){
+          if(list.length >= 5){
+            list.shift()
+            list.push(props.item);
+          }else{
+            list.push(props.item);
+          }
+        } 
+        localStorage.setItem('watched', JSON.stringify(list));
+
         navigate(`/detail/${props.item.id}`);
       }}
     >
