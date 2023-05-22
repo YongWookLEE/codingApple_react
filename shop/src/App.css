@@ -16,3 +16,17 @@
   background-size: cover;
   background-position: center;
 }
+
+.watched {
+  position: fixed;
+  top: 86%;
+  right: 18%;
+  padding: 12px;
+  font-weight: bold;
+  cursor: pointer;
+
+  width: 0%;
+  height: 50%;
+}
+  
+
