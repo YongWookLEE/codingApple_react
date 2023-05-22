@@ -1,11 +1,11 @@
 import './App.css';
 import { useEffect, useState } from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
 import data from "./store/data";
 import Main from "./routes/Main";
 import ItemDetail from "./routes/Detail";
 import Event from "./routes/Event";
 import Cart from "./routes/Cart";
+import Header from './component/Header';
 import WatchedList from "./component/WatchedList";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 
@@ -15,23 +15,10 @@ function App() {
 
 
   let [shoes, setShoes] = useState(data);
-  let watched = shoes;
-  let navigate = useNavigate();
 
   return (
     <div className="App">
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand onClick={() =>{
-            navigate("/");
-          }}>ShoeShop</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link onClick={()=>{
-              navigate("/cart")
-            }}>Cart</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
+      <Header/>
       <WatchedList/>
       <Routes>
         <Route path="/" element={<Main shoes={shoes} setShoes={setShoes} />} />
