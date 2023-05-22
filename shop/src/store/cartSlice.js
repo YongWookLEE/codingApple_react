@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const cart = createSlice({
     name: "cart",
@@ -15,7 +15,7 @@ const cart = createSlice({
         },
         addItem(state, action){
             let target = action.payload;
-
+            console.log(current(state)) // redux에서 state를 보려면 current 내장함수 써야한다. 
             if (state.find(i => i.id === target.id) === undefined){
                 state.push({ id: target.id, name: target.title, count: 1 });
                 alert("장바구니에 추가되었습니다.")
