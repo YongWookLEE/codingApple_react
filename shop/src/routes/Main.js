@@ -2,6 +2,8 @@ import Item from "../component/Item";
 import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import {changeTest1, changeTest2} from "../store/testSlice"; 
 
 let MoreBtn = styled.button`
   background: white;
@@ -13,6 +15,9 @@ let MoreBtn = styled.button`
 const Main = (props) => {
   let [btnClick, setBtnClick] = useState(2);
   let [loading, setLoading] = useState(false);
+  let test = useSelector((state) => state.test);
+  let dispatch = useDispatch();
+
   return (
     <>
       {loading ? <Loading /> : null}
@@ -22,6 +27,11 @@ const Main = (props) => {
           backgroundImage: `url(${process.env.PUBLIC_URL}/img/bg.png)`,
         }}
       />
+      <div> {test.data1} || {test.data2} <button onClick={() => {
+        dispatch(changeTest1());
+      }}>버튼1</button><button onClick={() => {
+        dispatch(changeTest2("persist Success"));
+      }}>버튼2</button></div>
       <div className="container">
         <div className="row">
           {props.shoes.map((item, idx) => {
