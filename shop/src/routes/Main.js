@@ -3,20 +3,20 @@ import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import {changeTest1, changeTest2} from "../store/testSlice"; 
+import { changeTest1, changeTest2 } from "../store/testSlice";
 
 let MoreBtn = styled.button`
   background: white;
   color: grey;
   border: none;
   font-size: 50px;
-`;
+`; //styled-component에서 사용되는 문법, 버튼 그리는법
 
 const Main = (props) => {
   let [btnClick, setBtnClick] = useState(2);
   let [loading, setLoading] = useState(false);
-  let test = useSelector((state) => state.test);
-  let dispatch = useDispatch();
+  let test = useSelector((state) => state.test); //리덕스에 있는 state 가져오는법
+  let dispatch = useDispatch(); // 리덕스에서 export한 함수를 실행하기 위해서는 dispatch로 감싸서 실행해야한다.
 
   return (
     <>
@@ -27,11 +27,24 @@ const Main = (props) => {
           backgroundImage: `url(${process.env.PUBLIC_URL}/img/bg.png)`,
         }}
       />
-      <div> {test.data1} || {test.data2} <button onClick={() => {
-        dispatch(changeTest1());
-      }}>버튼1</button><button onClick={() => {
-        dispatch(changeTest2("persist Success"));
-      }}>버튼2</button></div>
+      <div>
+        {" "}
+        {test.data1} || {test.data2}{" "}
+        <button
+          onClick={() => {
+            dispatch(changeTest1()); // 리덕스에서 export한 state 변경 함수와 그걸 사용하게 해주는 dispatch()
+          }}
+        >
+          버튼1
+        </button>
+        <button
+          onClick={() => {
+            dispatch(changeTest2("persist Success"));
+          }}
+        >
+          버튼2
+        </button>
+      </div>
       <div className="container">
         <div className="row">
           {props.shoes.map((item, idx) => {
